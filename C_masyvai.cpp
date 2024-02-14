@@ -4,7 +4,6 @@
 #include <string>
 #include <cstring>
 #include <cctype>
-#include <conio.h>
 
 using namespace std;
 const int CMax = 10;
@@ -19,8 +18,10 @@ struct Mokinys{
 
 bool Patikrinimas(string kint);
 void Vidurkis(Mokinys A[], int kiekis, int ND_kiekis);
+void Isvedimas(Mokinys A[], double VID[], double MED[], int kiekis);
 
 int main(){
+    //kiekis = m , ND_kiekis = n
     Mokinys A[CMax], B[CMax];
     int DID[CMax];
     string kint;
@@ -40,9 +41,9 @@ int main(){
         }
         temp++;
         kiekis++;
-        cout<<"Ar norite baigti irasyma, jie taip, irasykite 'T': " << endl;
+        cout<<"Jei norite baigti, irasykite 't', kitu atveju irasykite bet koki simboli: " << endl;
         cin >> input;
-        if(input == 'T') break;
+        if(input == 't') break;
         
     }
 
@@ -54,11 +55,15 @@ int main(){
         
         while(true){
             cin >> A[i].ND[temp];
+            if(cin.fail()){
+                cout << "Namu darbai turi buti skaicius!" <<endl;
+                return 0;
+            }
             temp++;
             ND_kiekis++;
-            cout<<"Ar norite baigti irasyma, jie taip, irasykite 'T': " << endl;
+            cout<<"Jei norite baigti, irasykite 't', kitu atveju irasykite bet koki simboli: " << endl;
             cin >> input;
-            if(input == 'T') break;
+            if(input == 't') break;
         }
         if(ND_kiekis2 != ND_kiekis && i!=0){
             cout << "Namu darbu kiekis turi buti vienodas!" << endl;
@@ -68,6 +73,10 @@ int main(){
         temp = 0;
         cout << "Irasykite egzamino rezultata: " << endl;
         cin >> A[i].egzaminas;
+        if(cin.fail()){
+            cout << "Namu darbai turi buti skaicius!" <<endl;
+            return 0;
+        }
     }
 
     for(int i=0; i<kiekis; i++){
@@ -82,35 +91,25 @@ int main(){
 
     for(int i=0; i<kiekis; i++){
         sort(B[i].ND, B[i].ND + (ND_kiekis+1));
-        cout<<endl;
         if((ND_kiekis+1)%2==0)
             MED[i] = (double) (B[i].ND[(ND_kiekis+1)/2 - 1] + B[i].ND[(ND_kiekis+1)/2]) / 2.0;
         else
             MED[i] = B[i].ND[(ND_kiekis+1)/2];
     }
-
-    cout<<endl;
-    cout << setw(20) << left << "Vardas" << setw(20) << left << "Pavardė" << setw(20) << right << "Galutinis (Vid.) / Galutinis(Med.)"<<endl;
-    cout << setfill('-') << setw(80) << " " << endl;
-    cout << setfill(' ');
-
-    for(int i = 0; i<kiekis; i++){
-         cout << setw(20) << left << A[i].vardas << setw(20) << left << A[i].pavarde << right << fixed << setprecision(2) << VID[i] << setw(18) << right << MED[i] << endl;
-     }
+    Isvedimas(A, VID, MED, kiekis);
      return 0;
 }
 void Vidurkis(Mokinys A[], int kiekis, int ND_kiekis){
     for(int i=0; i<kiekis; i++){
         double suma = 0;
         for(int j=0; j<ND_kiekis; j++){
-            cout<< A[i].ND[j]<<" ";
             suma += A[i].ND[j];
         }
         suma += A[i].egzaminas;
         VID[i] = suma / (ND_kiekis + 1);
     }
 }
- bool Patikrinimas(string kint){
+bool Patikrinimas(string kint){
      const int ilgis = kint.length();
      char* temp_array = new char[ilgis + 1];
      strcpy(temp_array, kint.c_str());
@@ -120,4 +119,14 @@ void Vidurkis(Mokinys A[], int kiekis, int ND_kiekis){
          }
      delete[] temp_array;
      return true;
+}
+void Isvedimas(Mokinys A[], double VID[], double MED[], int kiekis){
+    cout<<endl;
+    cout << setw(20) << left << "Vardas" << setw(20) << left << "Pavardė" << setw(20) << right << "Galutinis (Vid.) / Galutinis(Med.)"<<endl;
+    cout << setfill('-') << setw(80) << " " << endl;
+    cout << setfill(' ');
+
+    for(int i = 0; i<kiekis; i++){
+         cout << setw(20) << left << A[i].vardas << setw(20) << left << A[i].pavarde << right << fixed << setprecision(2) << VID[i] << setw(18) << right << MED[i] << endl;
+     }
 }
