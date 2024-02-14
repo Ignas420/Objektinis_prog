@@ -81,7 +81,7 @@ int main(){
         cout << "Irasykite egzamino rezultata: " << endl;
         A[i].egzaminas = (rand() % 10) + 1;
         if(cin.fail()){
-            cout << "Namu darbai turi buti skaicius!" <<endl;
+            cout << "Egzamino rezultatas turi buti skaicius!" <<endl;
             return 0;
         }
         if(A[i].egzaminas < 1 || A[i].egzaminas > 10){
