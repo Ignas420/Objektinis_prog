@@ -24,9 +24,8 @@ void Isvedimas(Mokinys A[], double VID[], double MED[], int kiekis);
 
 int main(){
     //kiekis = m , ND_kiekis = n
-    Mokinys A[CMax], B[CMax];
-    int DID[CMax];
-    string kint;
+    Mokinys A[CMax], B[CMax]; //Struktūros masyvas A skirtas duomenim kaupti ir masyvas B namų darbam ir egzaminam sujungti
+    string kint;    //Toliau seka laikinieji kintamieji
     int temp=0;
     int kiekis = 0;
     char input;
@@ -35,7 +34,7 @@ int main(){
     srand(time(NULL));
 
     cout << "Irasykite vardus ir pavardes: " << endl;
-
+    //Kol vyksta begalinis ciklas yra įrašomi vardai ir pavardės, atliekami tikrinimai ar teisingai parašyta 
     while(1){ 
         cin >> A[temp].vardas >> A[temp].pavarde;
         if(Patikrinimas(A[temp].vardas) == false || Patikrinimas(A[temp].pavarde) == false){
@@ -51,7 +50,8 @@ int main(){
     }
 
     temp = 0;
-
+    //Kol vyktsa begalinis ciklas yra įrašinėjami namų darbų ir egzamino pažymiai, atliekami tikrinimai
+    //ar viskas parašyta tinkamai
     for(int i=0; i<kiekis; i++){
         ND_kiekis = 0;
         cout << "Irasykite namu darbu pazymius: " << endl;
@@ -90,6 +90,7 @@ int main(){
             }
     }
 
+    //Sudedu namų darbus ir egzamino rezultatus į vieną masyvą
     for(int i=0; i<kiekis; i++){
         for(int j=0; j<ND_kiekis; j++)
             B[i].ND[j] = A[i].ND[j];
@@ -99,7 +100,9 @@ int main(){
     Vidurkis(A, kiekis, ND_kiekis);
 
     double MED[CMax];
-
+    //Kai visi duomenys yra viename masyve yra lengviau suskaičiuoti medianą surandant lyginius ir nelyginius skaičius
+    //ir padalinant iš dviejų indeksus. Jei skaičius lyginis, iš padalinto skaičiaus indekso atemame vieną, kadangi mums reikia skaičių, kurie yra
+    //viduryje, gretimai vienas kito ir dar kartą padaliname iš dviejų
     for(int i=0; i<kiekis; i++){
         sort(B[i].ND, B[i].ND + (ND_kiekis+1));
         if((ND_kiekis+1)%2==0)
@@ -110,6 +113,7 @@ int main(){
     Isvedimas(A, VID, MED, kiekis);
      return 0;
 }
+//Apskaičiuojamas vidurkis
 void Vidurkis(Mokinys A[], int kiekis, int ND_kiekis){
     for(int i=0; i<kiekis; i++){
         double suma = 0;
@@ -120,6 +124,7 @@ void Vidurkis(Mokinys A[], int kiekis, int ND_kiekis){
         VID[i] = suma / (ND_kiekis + 1);
     }
 }
+//Patikrinama ar įrašyti vardai ir pavardės atitinka standartus
 bool Patikrinimas(string kint){
      const int ilgis = kint.length();
      char* temp_array = new char[ilgis + 1];
@@ -131,6 +136,7 @@ bool Patikrinimas(string kint){
      delete[] temp_array;
      return true;
 }
+//Išvdeami rezultatai
 void Isvedimas(Mokinys A[], double VID[], double MED[], int kiekis){
     cout<<endl;
     cout << setw(20) << left << "Vardas" << setw(20) << left << "Pavardė" << setw(20) << right << "Galutinis (Vid.) / Galutinis(Med.)"<<endl;
