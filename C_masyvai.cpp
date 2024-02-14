@@ -4,6 +4,8 @@
 #include <string>
 #include <cstring>
 #include <cctype>
+#include <random>
+#include <time.h>
 
 using namespace std;
 const int CMax = 10;
@@ -28,8 +30,9 @@ int main(){
     int temp=0;
     int kiekis = 0;
     char input;
-    int ND_kiekis=0;
-    int ND_kiekis2;
+    int ND_kiekis=0, ND_kiekis2;
+
+    srand(time(NULL));
 
     cout << "Irasykite vardus ir pavardes: " << endl;
 
@@ -54,9 +57,13 @@ int main(){
         cout << "Irasykite namu darbu pazymius: " << endl;
         
         while(true){
-            cin >> A[i].ND[temp];
+            A[i].ND[temp] = (rand() % 10) + 1;
             if(cin.fail()){
                 cout << "Namu darbai turi buti skaicius!" <<endl;
+                return 0;
+            }
+            if(A[i].ND[temp] < 1 || A[i].ND[temp] > 10){
+                cout << "Pazymys turi buti desimtbaleje sistemoje!";
                 return 0;
             }
             temp++;
@@ -72,11 +79,15 @@ int main(){
         ND_kiekis2 = ND_kiekis;
         temp = 0;
         cout << "Irasykite egzamino rezultata: " << endl;
-        cin >> A[i].egzaminas;
+        A[i].egzaminas = (rand() % 10) + 1;
         if(cin.fail()){
             cout << "Namu darbai turi buti skaicius!" <<endl;
             return 0;
         }
+        if(A[i].egzaminas < 1 || A[i].egzaminas > 10){
+                cout << "Pazymys turi buti desimtbaleje sistemoje!";
+                return 0;
+            }
     }
 
     for(int i=0; i<kiekis; i++){
