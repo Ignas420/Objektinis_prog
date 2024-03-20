@@ -15,10 +15,23 @@ Kaip naudoti šią programą?
 Štai, kaip atrodytų programos veikimas, su pirmuoju generuojamu failu:
 ![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/e6641817-7a9f-4054-a1f2-b7ea10e94787)
 
+Vidurkio skaičiavimai su turimais failais:
+
 | Veiksmas                                         | Vidutinis laikas (sekundės)     |
 |--------------------------------------------------|---------------------------------|
 | Nuskaitymas                                      | 0.58707928                     |
-| Studentų rusiavimas                              | 0.11429616                     |
+| Studentų rūšiavimas                              | 0.11429616                     |
 | Mokslinčių studentų išvedimas į failus          | 1.114220953             |
 | Nuskriaustųjų studentų išvedimas į failus       | 2.679223533             |
 | Visų programų vykdymo laikas                    | 6.363009653              |
+
+Vidurkio skaičiavimai su sukurtais failais:
+
+| Veiksmas                                    | Vidutinis laikas (sekundės) |
+|-----------------------------------------|------------------|
+| Nuskaitymas                                 | 6.00445633       |
+| Studentų rūšiavimas                                 | 1.19214156       |
+| Mokslinčių studentų išvedimas į failus    | 7.111998         |
+| Nuskriaustųjų studentų išvedimas į failus   | 10.19265756      |
+| Visų programų vykdymo laikas                      | 39.58228033      |
+
